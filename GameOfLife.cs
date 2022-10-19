@@ -14,21 +14,24 @@ namespace GameOfLife
     {
         public static void Main()
         {
-            PrintConditionsOfPlace();
-            var (length, height) = GetLengthAndHeight();
-
-            PrintConditionsOfIterations();
-            int numOfIteration = GetNumOfIteration();
-            
-
-
-            var cellsArray = GetCellsArry(height, length);
-            PrintCellsArray(cellsArray);
-
-            for(int i = 0; i < numOfIteration; i++)
+            bool isRepeat = true;
+            while(isRepeat)
             {
-                cellsArray = GetNextCellsArray(cellsArray);
+                PrintConditionsOfPlace();
+                var (length, height) = GetLengthAndHeight();
+
+                PrintConditionsOfIterations();
+                int numOfIteration = GetNumOfIteration();
+
+                var cellsArray = GetCellsArry(height, length);
                 PrintCellsArray(cellsArray);
+
+                for(int i = 0; i < numOfIteration; i++)
+                {
+                    cellsArray = GetNextCellsArray(cellsArray);
+                    PrintCellsArray(cellsArray);
+                }
+                isRepeat = ContinueOrNot();
             }
         }
         public static (int length, int height) GetLengthAndHeight() 
@@ -225,6 +228,40 @@ namespace GameOfLife
         {
             Console.WriteLine("Please, enter length and than heigth of your life game.");
             Console.WriteLine("Place of life game can`t be less than 5x5 and more than 50x50.");
+        }
+        public static bool ContinueOrNot()
+        {
+            Console.WriteLine("If you want to continue please enter Yes, else enter No.");
+            string answer = Console.ReadLine();
+
+            bool isRepit = true;
+            while(isRepit)
+            {
+                switch(answer)
+                {
+                    case "Yes":
+                        return true;
+                        isRepit = false;
+                        break;
+                    case "yes":
+                        return true;
+                        isRepit = false;
+                        break;
+                    case "No":
+                        return false;
+                        isRepit = false;
+                        break;
+                    case "no":
+                        return false;
+                        isRepit = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter Yes or No.");
+                        isRepit = true;
+                        break;
+                }
+            }
+            return false;
         }
     }
 }
