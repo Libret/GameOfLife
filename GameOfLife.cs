@@ -256,8 +256,16 @@ namespace GameOfLife
                         isRepit = false;
                         break;
                     default:
-                        Console.WriteLine("Please enter Yes or No.");
-                        isRepit = true;
+                        try
+                        {
+                            Console.WriteLine("Please enter Yes or No.");
+                            answer = Console.ReadLine();
+                            isRepit = true;
+                        }
+                        catch (System.Exception)
+                        {
+                            
+                        }
                         break;
                 }
             }
